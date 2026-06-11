@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة مشروعي</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Font: Cairo only -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d6b6e;
+            --primary-dark: #095557;
+            --primary-light: #e6f4f1;
+            --accent: #1a9c8a;
+            --accent-dark: #147a6b;
+            --gold: #c8963e;
+            --gold-light: #fdf3e2;
+            --danger: #c0392b;
+            --danger-light: #fdecea;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --teal-50: #f0fdfa;
+            --teal-100: #ccfbf1;
+            --teal-600: #0d9488;
+            --teal-700: #0f766e;
+            --teal-800: #115e59;
+            --blue-50: #eff6ff;
+            --blue-600: #2563eb;
+            --red-50: #fef2f2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --amber-50: #fffbeb;
+            --amber-500: #f59e0b;
+            --amber-600: #d97706;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+            --radius-sm: 8px;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            font-size: 22px;
+            /* الحجم 22 */
+            line-height: 1.8;
+            background: #e8edf2;
+            background-image:
+                radial-gradient(ellipse at 20% 20%, rgba(13, 107, 110, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(26, 156, 138, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 50%, rgba(200, 150, 62, 0.02) 0%, transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+            direction: rtl;
+            color: var(--gray-800);
+        }
+
+        /* A4 Container – عرض واضح مع خط كبير */
+        .a4-wrapper {
+            max-width: 960px;
+            /* أعرض قليلاً لاستيعاب الخط 22 */
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .a4-page {
+            background: var(--white);
+            box-shadow: var(--shadow-xl);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* شريط علوي زخرفي */
+        .a4-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #0d6b6e 0%, #1a9c8a 35%, #c8963e 70%, #0d6b6e 100%);
+            z-index: 2;
+        }
+
+        /* علامة مائية خفيفة */
+        .a4-page::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(13, 107, 110, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(26, 156, 138, 0.015) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(200, 150, 62, 0.015) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page-content {
+            position: relative;
+            z-index: 1;
+            padding: 40px 50px 35px;
+        }
+
+        /* الهيدر */
+        .proposal-header {
+            text-align: center;
+            padding-bottom: 28px;
+            margin-bottom: 28px;
+            border-bottom: 3px dashed #dce8e5;
+            position: relative;
+        }
+
+        .proposal-header .icon-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0d6b6e, #1a9c8a);
+            color: #fff;
+            font-size: 34px;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 24px rgba(13, 107, 110, 0.35);
+        }
+
+        .proposal-header .badge-top {
+            display: inline-block;
+            background: #fdf3e2;
+            color: #8b6914;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 6px 20px;
+            border-radius: 24px;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .proposal-header h1 {
+            font-size: 2.2rem;
+            /* ≈ 48px */
+            font-weight: 800;
+            color: #0d3b3e;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .proposal-header h1 .highlight {
+            color: #0d6b6e;
+        }
+
+        .proposal-header h1 .highlight-accent {
+            color: #1a9c8a;
+        }
+
+        .proposal-header .subtitle {
+            font-size: 1.1rem;
+            /* ≈ 24px */
+            color: #6b7280;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        /* العناوين الفرعية */
+        .section-title {
+            font-size: 1.5rem;
+            /* ≈ 33px */
+            font-weight: 700;
+            color: #0d3b3e;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .section-title .icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .icon-box.blue {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .icon-box.teal {
+            background: #f0fdfa;
+            color: #0d9488;
+        }
+
+        .icon-box.amber {
+            background: #fffbeb;
+            color: #d97706;
+        }
+
+        .icon-box.red {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .icon-box.purple {
+            background: #f5f3ff;
+            color: #7c3aed;
+        }
+
+        .icon-box.gold {
+            background: #fdf3e2;
+            color: #b45309;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to left, #e5e7eb, transparent);
+            border-radius: 1px;
+            min-width: 40px;
+        }
+
+        /* بطاقات المعلومات */
+        .info-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 18px;
+            border-right: 5px solid #0d6b6e;
+            transition: all 0.25s;
+            font-size: 1rem;
+            /* 22px */
+        }
+
+        .info-card:hover {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+            border-color: #cbd5e1;
+            background: #fdfdfd;
+        }
+
+        .info-card.problem-card {
+            border-right-color: #ef4444;
+            background: #fffbfb;
+        }
+
+        .info-card.solution-card {
+            border-right-color: #10b981;
+            background: #f9fdf9;
+        }
+
+        .info-card.feature-card {
+            border-right-color: #6366f1;
+            background: #faf9fe;
+        }
+
+        .info-card.future-card {
+            border-right-color: #f59e0b;
+            background: #fffdf7;
+        }
+
+        .info-card .card-label {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 16px;
+            margin-bottom: 8px;
+            letter-spacing: 0.4px;
+        }
+
+        .label-problem {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .label-solution {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .label-feature {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .label-future {
+            background: #fffbeb;
+            color: #d97706;
+        }
+
+        .info-card h4 {
+            font-size: 1.2rem;
+            /* 26px */
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 8px;
+        }
+
+        .info-card p {
+            font-size: 1rem;
+            /* 22px */
+            color: #4b5563;
+            margin: 0;
+            line-height: 1.9;
+        }
+
+        /* قائمة الميزات */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            background: #f9fafb;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            font-size: 1rem;
+            /* 22px */
+            color: #374151;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+
+        .feature-list li:hover {
+            background: #f0fdfa;
+            border-color: #bae6fd;
+        }
+
+        .feature-list li .bullet {
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .bullet.teal-bullet {
+            background: #ccfbf1;
+            color: #0d9488;
+        }
+
+        .bullet.blue-bullet {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .bullet.amber-bullet {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .bullet.green-bullet {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .bullet.purple-bullet {
+            background: #e0e7ff;
+            color: #6366f1;
+        }
+
+        .bullet.red-bullet {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* صناديق التمييز */
+        .highlight-box {
+            background: linear-gradient(135deg, #fdf3e2 0%, #fffdf5 100%);
+            border: 1px solid #fcd34d;
+            border-radius: 12px;
+            padding: 20px 22px;
+            margin: 20px 0;
+            border-right: 6px solid #c8963e;
+            font-size: 1rem;
+        }
+
+        .highlight-box.teal-box {
+            background: linear-gradient(135deg, #f0fdfa 0%, #f9fdf9 100%);
+            border-color: #5eead4;
+            border-right-color: #0d9488;
+        }
+
+        .highlight-box.blue-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #faf9fe 100%);
+            border-color: #93c5fd;
+            border-right-color: #3b82f6;
+        }
+
+        .highlight-box h5 {
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 8px;
+            font-size: 1.1rem;
+            /* 24px */
+        }
+
+        .highlight-box p {
+            font-size: 1rem;
+            color: #4b5563;
+            margin: 0;
+            line-height: 1.9;
+        }
+
+        /* صندوق الملخص */
+        .abstract-box {
+            background: #f9fafb;
+            border: 2px solid #d1d5db;
+            border-radius: 14px;
+            padding: 24px 26px;
+            position: relative;
+            border-right: 6px solid #0d6b6e;
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+
+        .abstract-box::before {
+            content: '📋';
+            position: absolute;
+            top: -20px;
+            right: 24px;
+            font-size: 34px;
+            background: #fff;
+            padding: 0 10px;
+            border-radius: 8px;
+        }
+
+        .abstract-box h3 {
+            font-weight: 800;
+            color: #0d3b3e;
+            margin-top: 10px;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+            /* 28px */
+        }
+
+        .abstract-box p {
+            color: #374151;
+            font-size: 1rem;
+            line-height: 2;
+            margin: 0;
+        }
+
+        /* شبكة الأهداف */
+        .obj-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .obj-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .obj-item {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 1rem;
+            color: #374151;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            transition: all 0.2s;
+        }
+
+        .obj-item:hover {
+            background: #f0fdfa;
+            border-color: #99f6e4;
+        }
+
+        .obj-num {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #0d6b6e;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* بطاقة القيمة المضافة */
+        .value-card {
+            background: linear-gradient(135deg, #0d6b6e 0%, #095557 100%);
+            color: #fff;
+            border-radius: 14px;
+            padding: 24px 26px;
+            margin-top: 14px;
+            font-size: 1rem;
+        }
+
+        .value-card h4 {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .value-card p,
+        .value-card li {
+            color: #e0f0ee;
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+
+        .value-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .value-card ul li::before {
+            content: '✓ ';
+            color: #fcd34d;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        /* التذييل */
+        .proposal-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 24px;
+            border-top: 3px dashed #dce8e5;
+        }
+
+        .proposal-footer .prepared-by {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .proposal-footer .name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0d3b3e;
+            margin: 6px 0;
+        }
+
+        .proposal-footer .date-info {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            margin-top: 4px;
+        }
+
+        .proposal-footer .dept-stamp {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 22px;
+            border: 2px solid #0d6b6e;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0d6b6e;
+            letter-spacing: 0.5px;
+        }
+
+        .proposal-footer-enhanced {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 28px 24px 24px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            border-top: 4px solid #0d6b6e;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .proposal-footer-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 30%, rgba(26, 156, 138, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .footer-supervisor {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-supervisor .supervisor-label {
+            font-size: 1rem;
+            color: #4b5563;
+            font-weight: 500;
+            display: block;
+        }
+
+        .footer-supervisor .supervisor-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0d6b6e;
+            background: #e6f4f1;
+            display: inline-block;
+            padding: 6px 24px;
+            border-radius: 30px;
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+            border: 1px solid #b2d8d4;
+        }
+
+        .footer-team {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .footer-team .team-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .team-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 500px;
+            text-align: right;
+            display: inline-block;
+        }
+
+        .team-list li {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 10px 16px;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            border-right: 4px solid #1a9c8a;
+        }
+
+        .team-list li:hover {
+            background: #f0fdfa;
+            border-color: #99f6e4;
+            transform: translateX(-4px);
+        }
+
+        .team-list .member-number {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #1a9c8a;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-list .member-info {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .team-list .member-name {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .team-list .member-id {
+            font-size: 0.85rem;
+            color: #6b7280;
+            background: #f3f4f6;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-family: monospace;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .footer-prepared-by {
+            margin: 20px 0 14px;
+            position: relative;
+        }
+
+        .footer-prepared-by .prepared-label {
+            font-size: 1rem;
+            color: #4b5563;
+            font-weight: 500;
+            display: block;
+        }
+
+        .footer-prepared-by .prepared-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0d3b3e;
+            background: #fdf3e2;
+            display: inline-block;
+            padding: 8px 28px;
+            border-radius: 30px;
+            margin-top: 8px;
+            border: 1px solid #fcd34d;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-stamp {
+            margin-top: 14px;
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        .footer-stamp .dept-badge {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 6px 18px;
+            border: 2px solid #0d6b6e;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0d6b6e;
+            background: #ffffff;
+        }
+
+        .footer-date {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .team-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .team-list .member-info {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .team-list .member-number {
+                display: none;
+            }
+        }
+
+        /* تحسينات للجوال */
+        @media (max-width: 768px) {
+            body {
+                font-size: 20px;
+            }
+
+            .page-content {
+                padding: 24px 18px 20px;
+            }
+
+            .proposal-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .info-card {
+                padding: 14px 16px;
+            }
+
+            .info-card h4 {
+                font-size: 1.1rem;
+            }
+
+            .abstract-box {
+                padding: 16px 18px;
+            }
+
+            .value-card {
+                padding: 16px 18px;
+            }
+
+            .a4-page::before {
+                height: 5px;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+                font-size: 20px;
+            }
+
+            .a4-wrapper {
+                max-width: 100%;
+                box-shadow: none;
+            }
+
+            .a4-page {
+                box-shadow: none;
+                border-radius: 0;
+                page-break-after: always;
+            }
+
+            .a4-page::before {
+                height: 3px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="a4-wrapper">
+        <div class="a4-page">
+            <div class="page-content">
+
+                <!-- ==================== الهيدر ==================== -->
+                <header class="proposal-header">
+                    <div class="badge-top" style="background:  #1b585a; color: #fa6902; font-weight: 600;">مشروعي</div>
+                    <br>
+                    <span class="badge-top"> مقترح مشروع تخرج</span>
+                    <h1>
+                        <span class="highlight-accent" style="color: #fa6902;">منصة مشروعي</span>
+                    </h1>
+                    <p class="subtitle">منصة رقمية متكاملة لادارة واتمتة مشاريع التخرج الاكاديمية</p>
+                </header>
+
+                <!-- ==================== الملخص ==================== -->
+                <div class="abstract-box">
+                    <h3 style="margin-top: 30px;"> الملخص – Abstract</h3>
+                    <p>
+                        تهدف المنصة إلى تحويل عملية إدارة مشاريع التخرج التقليدية (الورقية والمنفصلة) إلى بيئة رقمية
+                        موحدة تجمع كافة الأطراف المعنية في نظام واحد عالي السرعة والكفاءة.
+                    </p>
+                    <br>
+                    <p>
+                        يعتمد على بنية التطبيقات ذات الصفحة الواحدة (Single Page Application - SPA) باستخدام بيئة عمل
+                        متكاملة متطورة مكونة من Laravel 11 + Vue 3 + Inertia.js.
+                    </p>
+                    <br>
+                    <p>
+                        تتابع المنصة المشروع عبر دورة حياة هندسية واضحة ومحددة؛ تبدأ من لحظة تقديم المقترح الأكاديمي،
+                        مروراً بتشكيل الفرق الطلابية، ثم تتبع مراحل التطوير والمراجعة الدورية، وصولاً إلى جدولة المناقشة
+                        النهائية ورصد الدرجات، واختتاماً بالأرشفة الرقمية الكاملة للمشاريع الناجحة.
+                    </p>
+                </div>
+
+                <!-- ==================== المشاكل والحلول ==================== -->
+                <div class="section-title">
+                    <span class="icon-box red">⚠️</span>
+                    <span>المشاكل التي يعاني منها المستخدمين </span>
+                </div>
+
+                <!-- المشكلة الأولى -->
+                <div
+                    style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 22px; margin-bottom: 18px; border-right: 5px solid #0d6b6e;">
+                    <div class="info-card problem-card">
+                        <span class="card-label label-problem">المشاكل التي تواجه الطلاب</span>
+                        <h4>غياب التوجيه الإبداعالأولي (بلا بوصلة)</h4>
+                        <p>يبدأ الطالب رحلته الأكاديمية في تشتت كامل؛ حيث يفتقر لآلية ذكية تساعده في اختيار عنوان مبتكر
+                            لمشروعه أو بناء هويته البصرية في بداية المساق.</p>
+                        <br>
+                        <h4>فقدان التتبع اللحظي لحالة التسليم (الفراغ الأكاديمي)</h4>
+                        <p>عند رفع التقارير، يعاني الطلاب من حالة غموض لعدم معرفتهم بموعد المراجعة الدورية أو موقفهم
+                            الحالي
+                            مقارنة بجدول الإنجاز الخاص ببقية زملائهم.</p>
+                        <br>
+                        <h4>تشتت التغذية الراجعة (التواصل الهامشي)</h4>
+                        <P>تقتصر علاقة الطالب بمشرفه على تعليقات جامدة ومتناثرة أسفل الملفات، بدلاً من وجود قناة نقاش
+                            تفاعلية تدعم بيئة التطوير المستمر.</P>
+                    </div>
+                    <div class="info-card solution-card">
+                        <span class="card-label label-solution">الحل البرمجي للمشكلة الأولى</span>
+                        <p>تزويد المنصة بـ "شات خارجي مساعد" يعمل كبيئة استشارية ذكية توجه الطلاب في مرحلة العصف الذهني
+                            لاختيار عناوين مبتكرة واقتراح أفكار للهوية البصرية قبل تقديم المقترح الرسمي.</p>
+                        <br>
+                        <span class="card-label label-solution">الحل البرمجي للمشكلة الثانية</span>
+                        <p>بناء واجهة مستخدم تفاعلية (Vue 3) تعتمد على "نظام تتبع الحالات والإصدارات" (Version Control)،
+                            حيث
+                            يظهر للطالب رقم الإصدار الحالي بشكل تسلسلي (إصدار 1، إصدار 2) مع طوابع زمنية دقيقة لتوثيق
+                            الرفع،
+                            بالإضافة إلى لوحة تحليلات تفاعلية تعتمد على مكتبة Chart.js لتوضيح موقف المشروع في خطة
+                            التسليم
+                            الزمنية مقارنة بالمساق.</p>
+                        <br>
+                        <span class="card-label label-solution">الحل البرمجي للمشكلة الثالثة</span>
+                        <p>توفير "شات مباشر وتفاعلي" يربط الطلاب بمشرفهم الأكاديمي بشكل حي، مدعوماً بنظام تعليقات هيكلي
+                            مخصص
+                            (Threaded Comments) أسفل كل تسليمة أو ملف PDF مرفوع لتوثيق النقاش والتعديلات المطلوبة.</p>
+
+                    </div>
+                </div>
+
+                <!-- المشكلة الثانية -->
+                <div
+                    style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 22px; margin-bottom: 18px; border-right: 5px solid #0d6b6e;">
+                    <div class="info-card problem-card">
+                        <span class="card-label label-problem">المشاكل التي تواجه المشرفين</span>
+                        <h4>تشتت قنوات التواصل الخارجية (جزر التواصل المتفرقة)</h4>
+                        <p>يضطر المشرف لمتابعة الفرق الطلابية عبر قنوات غير رسمية (إيميلات، واتساب)، نتيجة لغياب بيئة
+                            محادثة
+                            حية ومباشرة داخل المنظومة لربط النقاش بسياق المشروع.</p>
+                        <br>
+                        <h4>معضلة التنسيق والجدولة اليدوية</h4>
+                        <p>يواجه المشرف عبئاً تنظيمياً كبيراً عند رغبة الفريق في إنهاء المشروع، حيث يتطلب تحديد موعد
+                            الإنجاز
+                            والمناقشة تنسيقاً يدوياً معقداً ومنفصلاً مع الإدارة والممتحنين لتفادي تعارض القاعات أو
+                            المواعيد.
+                        </p>
+                    </div>
+                    <div class="info-card solution-card">
+                        <span class="card-label label-solution">الحل البرمجي للمشكلة الاولى</span>
+                        <p>دمج قنوات النقاش داخل "حساب عضو هيئة التدريس الموحد" (Faculty Space) ، والذي يوفر واجهة مدمجة
+                            تستقبل الإشعارات والمحادثات المباشرة من الطلاب، وتسمح للمشرف بمراجعة ملفات الـ PDF وقراءتها
+                            مباشرة داخل المتصفح وكتابة الملاحظات دون مغادرة النظام.</p>
+                        <br>
+                        <span class="card-label label-solution">الحل البرمجي للمشكلة الثانية</span>
+                        <p>تفعيل ميزة "الجدولة التلقائية الذكية"؛ فعند قيام المشرف بالضغط على زر "اكتمال المشروع"، يقوم
+                            النظام تلقائياً بتحديد موعد الإنجاز المبدئي وتشغيل خوارزمية "منع التعارض البرمجي" (Backend
+                            Validation) لضمان عدم حجز القاعات أو إدراج الممتحنين في أكثر من لجنة مناقشة في نفس الساعة.
+                        </p>
+                    </div>
+                </div>
+                <!-- المشكلة الثالثة -->
+                <div
+                    style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 22px; margin-bottom: 18px; border-right: 5px solid #0d6b6e;">
+                    <div class="info-card problem-card">
+                        <span class="card-label label-problem">تحديات الإدارة والذاكرة المؤسسية</span>
+                        <h4>اتخاذ قرارات قبول الأفكار خارج النظام في الهواء</h4>
+                        <p>اعتماد أفكار المشاريع شفهياً وتقليدياً خارج النظام (كالممرات والواتساب)، مما يسبب غياب
+                            التوثيق
+                            الرسمي لأسباب القبول أو الرفض.
+                            النتيجة: تمرير أفكار مكررة لغياب أداة المقارنة بالأرشيف، وتشتت الإدارة بين الملفات لعدم وجود
+                            واجهة موحدة تجمع وتفحص المقترحات المعلقة.</p>
+                        <br>
+                        <h4>غياب معايير التنافسية والتقدير الأكاديمي</h4>
+                        <p>يفتقر النظام الحالي لآلية توثيق تبرز مجهودات الفرق المتميزة، مما يحرم القسم من وجود "لوحة
+                            شرف"
+                            رقمية تصنف المشاريع الأفضل من حيث (كفاءة الوقت، ابتكار الفكرة، وتقييم المشرفين).</p>
+                        <br>
+                        <h4>صعوبة استخراج التقارير والتوثيق الرسمي</h4>
+                        <p>يواجه رئيس القسم ومسؤول المشرفين صعوبة في استخراج ملفات تقارير شاملة (PDF) تحتوي على كامل
+                            تفاصيل
+                            الفكرة ومعلوماتها لتقديمها في اجتماعات المجالس الأكاديمية أو أرشفتها بشكل فوري.</p>
+                    </div>
+                    <div class="info-card solution-card">
+                        <span class="card-label label-solution">الحل البرمجي للمشكلة الاولى</span>
+                        <p>تخصيص لوحة تحكم متقدمة لرئيس القسم ومسؤول المشرفين تتيح "المراجعة الرقمية الممنهجة
+                            للمقترحات"،
+                            مدعومة بـ "نظام التحقق من التكرار الأكاديمي" (Academic Redundancy Check) الذي يقارن الكلمات
+                            المفتاحية (Keywords) والملخص (Abstract) تلقائياً مع مستودع المشاريع السابقة لإصدار تقرير
+                            نسبة
+                            التطابق الفوري لمساعدة الإدارة في اتخاذ قرار القبول أو الرفض بناءً على بيانات صلبة.</p>
+                        <br>
+                        <span class="card-label label-solution">الحل البرمجي للمشكلة الثانية</span>
+                        <p>بناء "لوحة الشرف الرقمية" التي تضم 3 أقسام تفاضلية للمشاريع (الأفضل من حيث: الوقت، ابتكار
+                            الفكرة،
+                            وتقييم المشرفين) لخلق ذاكرة تميز سنوية.</p>
+                        <br>
+                        <span class="card-label label-solution">الحل البرمجي للمشكلة الثالثة</span>
+                        <p>إضافة ميزة "التصدير الذكي" (Export PDF / Excel) لاستخراج تقارير رسمية شاملة تحتوي على اسم
+                            الفكرة，
+                            الملخص، البيانات الوصفية، والدرجات لتقديمها في المجالس الأكاديمية أو أرشفتها تلقائياً في
+                            المستودع العام للمنصة.</p>
+                    </div>
+                </div>
+
+                <!-- المشكلة الرابعة -->
+                <div
+                    style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 22px; margin-bottom: 18px; border-right: 5px solid #0d6b6e;">
+                    <div class="info-card problem-card">
+                        <span class="card-label label-problem">بيئة المناقشين ولجنة التحكيم</span>
+                        <h4>تأخر التبليغ بمواعيد الجلسات</h4>
+                        <p>يتلقى المناقش بيانات ومواعيد لجان المناقشة متأخراً أو عبر وسائل تواصل تقليدية، لعدم وجود ربط
+                            برمي
+                            مباشر يحدث المواعيد فور ضغط المشرف على زر "اكتمال المشروع".</p>
+                        <br>
+                        <h4>عشوائية التقييم وغياب النماذج الموحدة</h4>
+                        <p>يدخل المناقش جلسة التقييم دون واجهة برمجية موحدة تتيح له رصد الدرجات وتدوين التوصيات
+                            والملاحظات
+                            النهائية بشكل رقمي متكامل يعتمد على معايير واضحة.</p>
+                    </div>
+                    <div class="info-card solution-card">
+                        <span class="card-label label-solution">الحل البرمجي للمشكلة الاولى</span>
+                        <p>تفعيل ميزة "التحويل الشرطي للواجهات" (Conditional Rendering باستخدام Vue 3) في حساب الدكتور
+                            الموحد؛ بمجرد تعيينه كمناقش وجدولة الجلسة، تظهر له أدوات التنبيه وجدول المواعيد المحدث
+                            لحظياً
+                            برقم القاعة والتوقيت بدقة وبشكل مقاوم للخطأ.</p>
+
+                        <br>
+                        <span class="card-label label-solution">الحل البرمجي للمشكلة الثانية</span>
+                        <p>بناء "نموذج رقمي مخصص لرصد الدرجات" مدمج في واجهة الممتحن، يسمح له بإدخال الدرجة النهائية من
+                            (100) بدعم للكسور العشرية (Decimal 5,2) ، مع حقل خاص لتدوين التوصيات والملاحظات الرسمية
+                            الصادرة
+                            عن لجنة التحكيم مباشرة في قاعدة البيانات لضمان الشفافية.</p>
+                    </div>
+                </div>
+                <!-- ==================== أهداف المشروع ==================== -->
+                <div class="section-title" style="margin-top: 30px;">
+                    <span class="icon-box teal"></span>
+                    <span>أهداف المشروع</span>
+                </div>
+                <div class="obj-grid">
+                    <div class="obj-item">
+                        <span class="obj-num">1</span>
+                        <span>أتمتة دورة الحياة: رقمنة وإدارة كافة مراحل مشروع التخرج أكاديمياً وفنياً بدءاً من تقديم
+                            المقترح حتى الأرشفة الرقمية النهائية.</span>
+                    </div>
+                    <div class="obj-item">
+                        <span class="obj-num">2</span>
+                        <span>التوجيه الذكي المبكر: توفير بيئة استشارية تفاعلية مدعومة بالذكاء الاصطناعي لمساعدة الطلاب
+                            في العصف الذهني واختيار عناوين مبتكرة.</span>
+                    </div>
+                    <div class="obj-item">
+                        <span class="obj-num">3</span>
+                        <span>التتبع اللحظي والإصدارات: تمكين الطلاب من متابعة حالة تسليماتهم دورياً وتوثيقها عبر نظام
+                            تتبع إصدارات زمني مدعوم بالتحليلات.</span>
+                    </div>
+                    <div class="obj-item">
+                        <span class="obj-num">4</span>
+                        <span>توحيد قنوات التواصل: دمج المحادثات الحية ونظام التعليقات الهيكلية (Threaded) في بيئة عمل
+                            موحدة تربط المشرف بالطلاب بكفاءة.</span>
+                    </div>
+                    <div class="obj-item">
+                        <span class="obj-num">5</span>
+                        <span>الجدولة الذكية والتنسيق: تفعيل خوارزمية حجز تلقائية تمنع تعارض القاعات والمواعيد للمناقشين
+                            والمشرفين فور اكتمال المشروع.</span>
+                    </div>
+                    <div class="obj-item">
+                        <span class="obj-num">6</span>
+                        <span>فحص التكرار الأكاديمي: حماية الذاكرة المؤسسية ومنع تكرار الأفكار عبر نظام فحص ذكي يقارن
+                            المقترحات بالمشاريع المؤرشفة سابقاً.</span>
+                    </div>
+                    <div class="obj-item">
+                        <span class="obj-num">7</span>
+                        <span>تعزيز التنافسية الأكاديمية: تحفيز المجموعات الطلابية المتميزة من خلال بناء لوحة شرف رقمية
+                            تصنف المشاريع وفق معايير الجودة والوقت.</span>
+                    </div>
+                    <div class="obj-item">
+                        <span class="obj-num">8</span>
+                        <span>الحوكمة وتصدير التقارير: تسهيل اتخاذ القرار الإداري عبر توفير لوحات تحكم متقدمة تتيح
+                            استخراج تقارير شاملة بملفات (PDF/Excel).</span>
+                    </div>
+                    <div class="obj-item">
+                        <span class="obj-num">9</span>
+                        <span>الحوسبة الفورية للتقييم: تمكين لجنة التحكيم من رصد الدرجات رقمياً بدعم للكسور العشرية
+                            وتدوين التوصيات مباشرة في قاعدة البيانات.</span>
+                    </div>
+                </div>
+
+                <!-- ==================== ميزات الموقع ==================== -->
+                <div class="section-title" style="margin-top: 35px;">
+                    <span class="icon-box blue"></span>
+                    <span>مميزات الموقع </span>
+                </div>
+                <ul class="feature-list">
+                    <li>
+                        <span class="bullet teal-bullet">1</span>
+                        <span><strong>المساعد الاستشاري الذكي (AI Bot) :</strong> شات بوت مخصص لمساعدة الطلاب في توليد
+                            عناوين المشاريع واقتراح أفكار الهوية البصرية.</span>
+                    </li>
+                    <li>
+                        <span class="bullet blue-bullet">2</span>
+                        <span><strong>نظام تعقب إصدارات الملفات (Version Control):</strong>واجهة ترفع الملفات بشكل
+                            تسلسلي موثق برقم الإصدار والطوابع الزمنية الدقيقة.</span>
+                    </li>
+                    <li>
+                        <span class="bullet amber-bullet">3</span>
+                        <span><strong>لوحة المؤشرات البيانية (Chart.js Dashboard):</strong>لوحة تفاعلية تعرض للطلاب نسبة
+                            إنجاز المشروع وموقعه من الخطة الزمنية للمساق.</span>
+                    </li>
+                    <li>
+                        <span class="bullet green-bullet">4</span>
+                        <span><strong>نظام النقاش الهيكلي (Threaded Comments):</strong>إمكانية كتابة تعليقات وردود
+                            متسلسلة ومباشرة أسفل ملفات الـ PDF المرفوعة.</span>
+                    </li>
+                    <li>
+                        <span class="bullet purple-bullet">5</span>
+                        <span><strong>قارئ ملفات مدمج (In-Browser PDF Viewer):</strong>أداة تتيح للمشرف قراءة التقارير
+                            ومراجعتها وكتابة الملاحظات دون مغادرة النظام.</span>
+                    </li>
+                    <li>
+                        <span class="bullet teal-bullet">6</span>
+                        <span><strong>مستكشف الفحص الذكي (Redundancy Check):</strong>خوارزمية تقارن الكلمات المفتاحية
+                            للمقترح بالأرشيف لتحديد نسبة التطابق فوراً.</span>
+                    </li>
+                    <li>
+                        <span class="bullet amber-bullet">7</span>
+                        <span><strong>محرك الجدولة التلقائية والمنع البرمجي:</strong>نظام يحجز قاعات ولجان المناقشة
+                            تلقائياً مع تفعيل (Backend Validation) لمنع التعارض</span>
+                    </li>
+                    <li>
+                        <span class="bullet blue-bullet">8</span>
+                        <span><strong>لوحة الشرف الديناميكية:</strong>واجهة عامة تعرض وتصنف المشاريع المتميزة سنوياً
+                            بناءً على تقييمات المشرفين وسرعة الإنجاز.</span>
+                    </li>
+                    <li>
+                        <span class="bullet green-bullet">9</span>
+                        <span><strong>أداة التصدير الفوري (Export PDF/Excel):</strong>أزرار مخصصة لرؤساء الأقسام
+                            لاستخراج تقارير الدرجات والبيانات الوصفية بضغطة واحدة</span>
+                    </li>
+                    <li>
+                        <span class="bullet purple-bullet">10</span>
+                        <span><strong>واجهات التبديل الشرطي (Conditional Rendering):</strong>نظام يحول واجهة الدكتور
+                            تلقائياً لتعرض أدوات التقييم بمجرد تعيينه كمناقش.</span>
+                    </li>
+                    <li>
+                        <span class="bullet teal-bullet">11</span>
+                        <span><strong>نموذج الرصد العشري للدرجات:</strong>حقول إدخال ذكية في واجهة الممتحن تدعم الكسور
+                            العشرية ($Decimal\>5,2$) لتوثيق تقييم اللجنة.</span>
+                    </li>
+                </ul>
+
+
+                <!-- ==================== القيمة المضافة ==================== -->
+                <div class="section-title">
+                    <span class="icon-box gold"></span>
+                    <span>القيمة المضافة – Value Proposition</span>
+                </div>
+                <div class="value-card">
+                    <h4> لماذا هذا المشروع مهم ويستحق التنفيذ؟</h4>
+                    <ul>
+                        <li>سد الفجوة البرمجية: يوفر دورة حياة هندسية متكاملة ومخصصة لمشاريع التخرج لا تغطيها الأنظمة
+                            التعليمية العامة (كالمودل).
+                        </li>
+                        <li>الانتقال من الإدارة إلى الأتمتة: يلغي التنسيق اليدوي المعقد للجان والقاعات عبر خوارزمية ذكية
+                            تمنع التعارض برمجياً.
+                        </li>
+                        <li>حماية الملكية الفكرية والأصالة: يمنع تكرار الأفكار ويحافظ على الذاكرة المؤسسية للجامعة بنظام
+                            فحص ذكي ومستودع رقمي دائم.</li>
+                        <li>تحسين جودة المخرجات الأكاديمية: يرفع كفاءة المشاريع من خلال التوجيه المبكر بالذكاء الاصطناعي
+                            وتسهيل النقاش التفاعلي الهيكلي.
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <!-- ==================== التذييل ==================== -->
+
+                <footer class="proposal-footer-enhanced" style="margin-top: 200px;">
+                    <!-- المشرف -->
+                    <div class="footer-supervisor">
+                        <span class="supervisor-label">👨‍🏫 مشرف المساق</span>
+                        <div class="supervisor-name">المهندس محمود ظهير</div>
+                    </div>
+
+                    <!-- أعضاء التيم -->
+                    <div class="footer-team">
+                        <span class="team-label">👥 أعضاء تيم المشروع</span>
+                        <ul class="team-list">
+                            <li>
+                                <span class="member-number">4</span>
+                                <div class="member-info">
+                                    <span class="member-name">محمد هشام اسماعيل الهندي</span>
+                                    <span class="member-id">120232093</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="member-number">3</span>
+                                <div class="member-info">
+                                    <span class="member-name">محمد زياد حسين الغول</span>
+                                    <span class="member-id">120230579</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="member-number">2</span>
+                                <div class="member-info">
+                                    <span class="member-name">محمد رفعت سامي النونو</span>
+                                    <span class="member-id">120241548</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <span class="member-number">1</span>
+                                <div class="member-info">
+                                    <span class="member-name">أنس محمد عودة الشنطي</span>
+                                    <span class="member-id">120226878</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- إعداد وتقديم -->
+                    <div class="footer-prepared-by">
+                        <span class="prepared-label">📝 إعداد وتقديم</span>
+                        <div class="prepared-name">محمد هشام اسماعيل الهندي</div>
+                    </div>
+
+
+                </footer>
+
+            </div><!-- .page-content -->
+        </div><!-- .a4-page -->
+    </div><!-- .a4-wrapper -->
+   
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+</body>
+
+</html>
